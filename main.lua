@@ -6,6 +6,9 @@ Class = require "lib.hump.class"
 Signal = require "lib.hump.signal"
 Camera = require "lib.hump.camera"
 require "playerPhysicsTest"
+require "game"
+require "shop"
+menuCursor = 0
 
 function love.load()
     love.window.setMode(800, 608, {fullscreen = false, vsync = 1,
@@ -20,4 +23,8 @@ end
 
 function love.draw()
     Gamestate.draw()
+end
+
+function love.keypressed(key)
+    Gamestate.keypressed(key)
 end
