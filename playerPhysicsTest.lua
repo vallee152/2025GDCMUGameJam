@@ -2,7 +2,7 @@ fizz = require("lib.fizzx")
 Class = require("lib.hump.class")
 fizz.setGravity(0, 600)
 
-animationTest = {}
+playerPhysicsTest = {}
 
 player = fizz.addDynamic('rect', 300, 100, 16, 32)
 
@@ -21,13 +21,13 @@ Platform = Class {
 wall1 = Platform(100, 400, 200, 10)
 wall2 = Platform(600, 400, 200, 10)
 
-function animationTest:enter()
+function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
 
     player.speed = 200
     player.y_velocity = 0
     player.jump_velocity = -300
-    player.img = love.graphics.newImage('purple.png')
+    player.img = love.graphics.newImage('Colours/player.png')
     player.jump_max = 1
     player.jump_count = 1
     player.draw = function()
@@ -36,7 +36,7 @@ function animationTest:enter()
     count = 0
 end
 
-function animationTest:update(dt)
+function playerPhysicsTest:update(dt)
     local dx,dy = player.x - camera.x, player.y - camera.y --camera update stuff
     camera:move(dx/2, dy/2)
     
@@ -64,7 +64,7 @@ function animationTest:update(dt)
     fizz.setGravity(0, 600*(0.01*player.y))
 end
 
-function animationTest:draw()
+function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
     love.graphics.print(tostring(player.jump_count), 100, 100)
