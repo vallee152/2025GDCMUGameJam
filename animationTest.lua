@@ -4,6 +4,7 @@ player = {}
 a = {}
 
 function animationTest:enter()
+    camera = Camera(player.x, player.y)
     platform.width = love.graphics.getWidth()
     platform.height = love.graphics.getHeight()
 
@@ -31,6 +32,9 @@ function animationTest:enter()
 end
 
 function animationTest:update(dt)
+    local dx,dy = player.x - camera.x, player.y - camera.y --camera update stuff
+    camera:move(dx/2, dy/2)
+    
     if math.fmod(math.floor(num),2) == 0 then --If it is even
         player.img = a[1] --Green
     else
@@ -67,8 +71,12 @@ function animationTest:update(dt)
 end
 
 function animationTest:draw()
+    camera:attach() --this MUST be at the beginning of draw()
+  
     love.graphics.setColor(1, 1, 1)
     love.graphics.rectangle('fill', platform.x, platform.y, platform.width, platform.height)
 
-    love.graphics.draw(player.img, player.x, player.y, 0, 1, 1, 0, 32)
+    love.graphics.draw(player.img, player.x, player.y, 0, 1, 1, 0, 32) 
+    
+    camera:detach() --MUST be at the end of draw()
 end
