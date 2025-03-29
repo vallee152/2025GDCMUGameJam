@@ -1,53 +1,76 @@
-fizz = require("fizzx")
-Class = require("lib/hump.class")
+fizz = require("lib.fizzx")
+Class = require("lib.hump.class")
 fizz.setGravity(0, 600)
 
-ball = fizz.addDynamic('rect', 300, 100, 16, 16)
-wall1 = fizz.addStatic('rect', 100, 400, 200, 10)
-wall2 = fizz.addStatic('rect', 600, 400, 200, 10)
+animationTest = {}
+
+player = fizz.addDynamic('rect', 300, 100, 16, 32)
 
 
-function love.load()
-    ball.speed = 200
-    ball.y_velocity = 0
-    ball.jump_velocity = -300
-    ball.img = love.graphics.newImage('purple.png')
-    ball.jump_max = 1
-    ball.jump_count = 1
-    ball.draw = function()
-        love.graphics.draw(ball.img, ball.x-ball.hw, ball.y-ball.hh)
-        love.graphics.rectangle('line', ball.x - ball.hw, ball.y - ball.hh, ball.hw*2, ball.hh*2)
+Platform = Class {
+    
+    init = function(self, x, y, halfWidth, halfHeight)
+        self.phys = fizz.addStatic('rect', x, y, halfWidth, halfHeight)
+    end;
+    draw = function(self)
+        love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
+    end;
+}
+
+
+wall1 = Platform(100, 400, 200, 10)
+wall2 = Platform(600, 400, 200, 10)
+
+function animationTest:enter()
+    camera = Camera(player.x, player.y)
+
+    player.speed = 200
+    player.y_velocity = 0
+    player.jump_velocity = -300
+    player.img = love.graphics.newImage('purple.png')
+    player.jump_max = 1
+    player.jump_count = 1
+    player.draw = function()
+        love.graphics.draw(player.img, player.x-player.hw, player.y-player.hh, 0, 1, 2)
     end
     count = 0
 end
 
-
-function love.update(dt)
+function animationTest:update(dt)
+    local dx,dy = player.x - camera.x, player.y - camera.y --camera update stuff
+    camera:move(dx/2, dy/2)
+    
     fizz.update(dt)
 
     if love.keyboard.isDown('right') then
-        ball.x = ball.x + (ball.speed * dt)
+        player.x = player.x + (player.speed * dt)
     elseif love.keyboard.isDown('left') then
-        ball.x = ball.x - (ball.speed * dt)
+        player.x = player.x - (player.speed * dt)
     end
 
     function love.keypressed(key, scancode, isrepeat)
         if key == 'up' then
-            if ball.jump_count ~= 0 then
-                fizz.setVelocity(ball, 0, ball.jump_velocity)
-                ball.jump_count = ball.jump_count-1
+            if player.jump_count ~= 0 then
+                fizz.setVelocity(player, 0, player.jump_velocity)
+                player.jump_count = player.jump_count-1
             end
         end
     end
-    x, y = fizz.getVelocity(ball)
+    x, y = fizz.getVelocity(player)
     if y == 0 then
-        ball.jump_count = ball.jump_max
+        player.jump_count = player.jump_max
     end
+
+    fizz.setGravity(0, 600*(0.01*player.y))
 end
 
-function love.draw()
-    love.graphics.print(tostring(ball.jump_count), 100, 100)
-    ball.draw()
-    love.graphics.rectangle("fill", wall1.x - wall1.hw, wall1.y - wall1.hh, wall1.hw*2, wall1.hh*2)
-    love.graphics.rectangle("fill", wall2.x - wall2.hw, wall2.y - wall2.hh, wall2.hw*2, wall2.hh*2)
+function animationTest:draw()
+    camera:attach() --this MUST be at the beginning of draw() 
+
+    love.graphics.print(tostring(player.jump_count), 100, 100)
+    player.draw()
+    wall1:draw()
+    wall2:draw()
+    
+    camera:detach() --MUST be at the end of draw()
 end
