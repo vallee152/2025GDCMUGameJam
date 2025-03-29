@@ -1,4 +1,4 @@
-{
+upgrades = {
   jumpBoost = {
     title = "Jump Servos",
     desc = "Increases jump force, letting you jump higher in strong gravity."
