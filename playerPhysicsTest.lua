@@ -31,7 +31,7 @@ function playerPhysicsTest:enter()
     player.jump_max = 1
     player.jump_count = 1
     player.draw = function()
-        love.graphics.draw(player.img, player.x-player.hw, player.y-player.hh, 0, 1, 2)
+        love.graphics.draw(player.img, player.x-player.hw*2, player.y-player.hh*2, 0, 1, 2)
     end
     count = 0
 end

@@ -11,7 +11,7 @@ function love.load()
     love.window.setMode(800, 608, {fullscreen = false, vsync = 1,
         msaa = 0, resizable = false, borderless = false})
     love.graphics.setDefaultFilter('nearest', 'nearest', 0)
-    Gamestate.switch(animationTest)
+    Gamestate.switch(playerPhysicsTest)
 end
 
 function love.update(dt)
