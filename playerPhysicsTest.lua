@@ -1,5 +1,6 @@
 fizz = require("lib.fizzx")
 Class = require("lib.hump.class")
+require("classPlatform")
 fizz.setGravity(0, 600)
 
 playerPhysicsTest = {}
@@ -7,19 +8,9 @@ playerPhysicsTest = {}
 player = fizz.addDynamic('rect', 300, 100, 16, 32)
 
 
-Platform = Class {
-    
-    init = function(self, x, y, halfWidth, halfHeight)
-        self.phys = fizz.addStatic('rect', x, y, halfWidth, halfHeight)
-    end;
-    draw = function(self)
-        love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
-    end;
-}
-
-
 wall1 = Platform(100, 400, 200, 10)
 wall2 = Platform(600, 400, 200, 10)
+flyingBox = MovingPlatform(300, 300, 50, 50, 300, 0, 50, 0)
 
 function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
@@ -71,6 +62,7 @@ function playerPhysicsTest:draw()
     player.draw()
     wall1:draw()
     wall2:draw()
+    flyingBox:draw()
     
     camera:detach() --MUST be at the end of draw()
 end
