@@ -10,7 +10,7 @@ player = fizz.addDynamic('rect', 300, 100, 16, 32)
 
 wall1 = Platform(100, 400, 200, 10)
 wall2 = Platform(600, 400, 200, 10)
-flyingBox = MovingPlatform(300, 300, 50, 50, 300, 0, 50, 0)
+flyingBox = MovingPlatform(300, 350, 50, 10, 50, 0, 400)
 
 function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
@@ -32,6 +32,7 @@ function playerPhysicsTest:update(dt)
     camera:move(dx/2, dy/2)
     
     fizz.update(dt)
+    flyingBox:update()
 
     if love.keyboard.isDown('right') then
         player.x = player.x + (player.speed * dt)
@@ -45,6 +46,8 @@ function playerPhysicsTest:update(dt)
                 fizz.setVelocity(player, 0, player.jump_velocity)
                 player.jump_count = player.jump_count-1
             end
+        elseif key == "t" then
+          flyingBox:toggle()
         end
     end
     x, y = fizz.getVelocity(player)
@@ -52,13 +55,13 @@ function playerPhysicsTest:update(dt)
         player.jump_count = player.jump_max
     end
 
-    fizz.setGravity(0, 600*(0.01*player.y))
+    fizz.setGravity(0, 600+(0.01*player.y))
 end
 
 function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
-    love.graphics.print(tostring(player.jump_count), 100, 100)
+    
     player.draw()
     wall1:draw()
     wall2:draw()
