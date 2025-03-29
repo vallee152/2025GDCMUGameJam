@@ -2,7 +2,7 @@ shop = {}
 local shopBackground
 local shopItems
 local shopBonus
-local cursor
+local cursor = 0
 
 function shop:init()
     --[[shopBackground = love.graphics.newImage('backgrounds/shop')
@@ -64,7 +64,7 @@ function shop:draw()
     love.graphics.print(cursor, 0, 0)
 end
 
-function shop:getKey()
+function shop:keypressed(key)
     cursor = cursor + 1
 end
 
