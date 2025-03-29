@@ -8,6 +8,7 @@ Camera = require "lib.hump.camera"
 require "playerPhysicsTest"
 require "game"
 require "shop"
+menuCursor = 0
 
 function love.load()
     love.window.setMode(800, 608, {fullscreen = false, vsync = 1,
