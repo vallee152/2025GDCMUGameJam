@@ -1,4 +1,4 @@
-startingPower = true
+startingPower = false
 gravity = 600
 local startx = 18
 local starty = 324
@@ -17,7 +17,7 @@ movingPlatforms = {
 coins = {}
 
 player = Player(startx, starty, 16, 32)
-switch = Switch(-500,-500, startingPower) --coconut
+switch = Switch(100,340, startingPower) --coconut
 
 portals = {
   enter = Portal(startx + 32,starty+128,false),

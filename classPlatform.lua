@@ -134,13 +134,18 @@ Switch = Class{
     end;
     
     draw = function(self)
-      if self.on then
+      if self.on == true then
         self.animationCount = self.animationCount + (self.animationSpeed*0.02)
         love.graphics.draw(self.animationSet[math.fmod(math.floor(self.animationCount), 2)], self.hitbox.x-self.hitbox.hw-2, self.hitbox.y-self.hitbox.hh-2, 0, 64/20, 64/20)
 
       else
         love.graphics.draw(self.animationSet[-1], self.hitbox.x-self.hitbox.hw-2, self.hitbox.y-self.hitbox.hh-2, 0, 64/20, 64/20)
       end
+    end;
+    
+    forceOff = function(self)
+      self.on = false
+      Signal.emit("power")
     end;
     
     toggle = function(self)
