@@ -5,13 +5,13 @@ startingPower = false --true if we start with the power on, false if we start wi
 gravity = 700
 
 platforms = {
-    floor1 = Platform(100, 400, 200, 10),
+    floor1 = Platform(100, 400, 200, 10,0),
     
 }
 
 movingPlatforms = {
-    flyingBox1 = MovingPlatform(540, 600, 50, 10, 160, 80, 250,50),
-    flyingBox2 = MovingPlatform(540, 100, 50, 10, 160, 0, 250,50),
+    flyingBox1 = MovingPlatform(540, 600, 50, 10, 160, 80, 250,50,0),
+    flyingBox2 = MovingPlatform(540, 100, 50, 10, 160, 0, 250,50,0),
 }
 
 

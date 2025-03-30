@@ -10,6 +10,7 @@ require "game"
 require "shop"
 require "levelComplete"
 require "inventory"
+require "deathScene"
 menuCursor = 0
 levelCurrent = 1
 levelCheckpoint = 1

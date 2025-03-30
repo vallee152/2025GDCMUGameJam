@@ -34,6 +34,9 @@ function playerPhysicsTest:keypressed(key)
         end
 end
 function playerPhysicsTest:update(dt)
+    if player.hitbox.y > death then
+      return Gamestate.push(deathScene)
+    end
     time = dt
     if timeControl then
         time = time/player.timeControlStrength

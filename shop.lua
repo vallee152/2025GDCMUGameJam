@@ -146,6 +146,8 @@ function shop:keypressed(key)
     elseif key == 'q' then
         shop:buyItem()
     elseif key == 'lshift' or key == 'rshift' then
+        inventory.levelCurrent = inventory.levelCurrent + 1
+        inventory.levelCheckpoint = inventory.levelCurrent
         return Gamestate.push(playerPhysicsTest)
     end
     return false
