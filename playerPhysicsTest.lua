@@ -6,12 +6,8 @@ require("testLevel")
 
 playerPhysicsTest = {}
 
-player = fizz.addDynamic('rect', 300, 100, 16, 32)
+player = fizz.addDynamic('rect', 0, 100, 16, 32)
 
-
-wall1 = Platform(100, 400, 200, 10)
-wall2 = Platform(600, 400, 200, 10)
-flyingBox = MovingPlatform(300, 350, 50, 10, 50, 0, 400)
 
 function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
