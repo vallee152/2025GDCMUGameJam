@@ -36,7 +36,13 @@ function playerPhysicsTest:update(dt)
     for i,v in pairs(coins) do
       v:isColliding(player, dt)
     end
+<<<<<<< Updated upstream
 
+=======
+    for i,v in pairs(portals) do
+      v:update(dt)
+    end
+>>>>>>> Stashed changes
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
         player.animationCount = player.animationCount + (player.animationSpeed * time)
@@ -94,6 +100,9 @@ function playerPhysicsTest:draw()
 
     love.graphics.print("Scrap: " ..tostring(inventory.wallet), -300+camera.x, -300+camera.y)
     switch:draw()
+    for i,v in pairs(portals) do
+      v:draw()
+    end
     player:draw()
     for i,v in pairs(platforms) do
       v:draw()

@@ -22,5 +22,12 @@ coins = {
   
 }
 
+<<<<<<< Updated upstream
 switch = Switch(100,400, startingPower)
 
+=======
+portals = {
+  exit = Portal(800, 330, true)
+}
+switch = Switch(100,400, startingPower)
+>>>>>>> Stashed changes
