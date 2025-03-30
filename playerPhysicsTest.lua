@@ -13,7 +13,6 @@ require("testLevel")
 
 playerPhysicsTest = {}
 
-player = Player(100, 100, 16, 32)
 
 
 function playerPhysicsTest:enter()

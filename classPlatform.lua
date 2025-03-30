@@ -108,15 +108,16 @@ Portal = Class{
   update = function(self, dt)
     self.animationCount = self.animationCount + (self.animationSpeed * dt)
     self.img = self.animationSet[math.fmod(math.floor(self.animationCount), 4)]
-    if isExit then
-      _, _, pen = Shapes.test(player.hitbox, self.hitbox, time)
-      if pen ~= nil then
+    if self.isExit == true then
+      _, _, self.pen = Shapes.test(player.hitbox, self.hitbox, time)
+      if self.pen ~= nil then
         self.exited = true
       end
     end
   end;
   
   draw = function(self)
-    love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5, self.hitbox.y - self.hitbox.hh*2, 0, 2, 2)
+    love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*2, self.hitbox.y - self.hitbox.hh*2, 0, 2, 2)
+
   end;
   }

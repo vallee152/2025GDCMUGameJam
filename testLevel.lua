@@ -3,6 +3,8 @@ require("classPlayer")
 require("classPickup")
 startingPower = false --true if we start with the power on, false if we start with it off.
 gravity = 600
+local startx = 18
+local starty = 324
 
 platforms = {
   floor1 = Platform(100, 400, 200, 10),
@@ -24,7 +26,11 @@ coins = {
 
 switch = Switch(100,400, startingPower)
 
+
+player = Player(startx, starty, 16, 32)
+
 portals = {
+  enter = Portal(startx + 32,starty+128,false),
   exit = Portal(800, 500, true)
 }
 switch = Switch(100,400, startingPower)
