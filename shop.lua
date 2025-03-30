@@ -80,7 +80,7 @@ function shop:init()
 end
 
 function shop:enter()
-    shopBonus = false --[[TODO: check how many levels the player has gone through]]
+    inventory.wallet = math.ceil(inventory.wallet * (1 + (inventory.levelCurrent - inventory.levelCheckpoint) * .1))
     menuCursor = 0
 end
 

@@ -29,9 +29,11 @@ function playerPhysicsTest:keypressed(key)
             end
         elseif key == "down" then
           switch:toggle()
-        elseif key == "lshift" or key == "rshift" then
-            player.maxVelocity = 400
-            player.speed = 14
+        elseif inventory[2].quantity ~= 0 then
+            if key == "lshift" or key == "rshift" then
+                player.maxVelocity = 400
+                player.speed = 14
+            end
         elseif key == "q" then
             timeControl = not timeControl
         end
