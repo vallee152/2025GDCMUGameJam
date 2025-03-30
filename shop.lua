@@ -22,11 +22,14 @@ local destPos = {
 }
 local i
 local returnTo
+local infoText = ''
+local greyOut
 
 function shop:init()
     shopBackground = love.graphics.newImage('Colours/shopBackground.png')
     shopForeground = love.graphics.newImage('Colours/shopForeground.png')
     shopSelector = love.graphics.newImage('Colours/shopSelector.png')
+    greyOut = love.graphics.newImage('Colours/greyOut.png')
 
     shopItems = {
         length = 4,
@@ -34,7 +37,7 @@ function shop:init()
             title = upgrades.sprint.title,
             desc = upgrades.sprint.desc,
             dPrice = 1,
-            scale = 0,
+            scale = -1,
             cPrice = 1,
             max = 1,
             sprite = love.graphics.newImage('Colours/sprint.png'),
@@ -79,7 +82,6 @@ end
 function shop:enter()
     shopBonus = false --[[TODO: check how many levels the player has gone through]]
     menuCursor = 0
-    returnTo = previous
 end
 
 function shop:leave()
@@ -114,12 +116,26 @@ function shop:draw()
     love.graphics.draw(shopForeground, 0, 0, 0, 2)
     for i = 0, 3, 1 do
         love.graphics.draw(shopItems[i].sprite, 224 + i * 96, 160, 0, 2)
+        if inventory[i].quantity >= shopItems[i].max and shopItems[i].max ~= 0 then
+            love.graphics.draw(greyOut, 224 + i * 96, 160, 0, 2)
+        end
     end
     love.graphics.draw(shopSelector, currPos.x, currPos.y, 0, 2)
     love.graphics.print({{1,1,1}, shopItems[menuCursor].title}, 224, 230)
     love.graphics.print({{1,1,1}, shopItems[menuCursor].desc}, 228, 260)
     love.graphics.print({{1,1,1}, 'Price: ' .. tostring(shopItems[menuCursor].cPrice)
-        .. shop:tabText(tostring(shopItems[menuCursor].cPrice), 6) .. 'Quantity: ' .. tostring(0)}, 228, 390)
+        .. shop:tabText(tostring(shopItems[menuCursor].cPrice), 6) .. 'Quantity: ' .. tostring(inventory[menuCursor].quantity)}, 228, 390)
+    if inventory.wallet < shopItems[menuCursor].cPrice and infoText == '' then
+        infoText = 'NOT ENOUGH GEARS: ' .. tostring(inventory.wallet)
+    end
+    local moneyString = 'YOUR GEARS: ' .. tostring(inventory.wallet)
+    if infoText == '' then
+        infoText = moneyString
+    end
+    love.graphics.print({{1,1,1}, infoText}, (love.graphics.getWidth() - Font:getWidth(infoText)) / 2, 364)
+    if infoText == moneyString then
+        infoText = ''
+    end
 end
 
 function shop:keypressed(key)
@@ -128,18 +144,31 @@ function shop:keypressed(key)
     elseif key == 'down' or key == 'right' or key == 's' or key == 'd' then
         menuCursor = (menuCursor + 1) % shopItems.length
     elseif key == 'q' then
-        shop:buyItem(menuCursor)
+        shop:buyItem()
     elseif key == 'lshift' or key == 'rshift' then
-        return Gamestate.pop()
+        return Gamestate.push(playerPhysicsTest)
     end
     return false
 end
 
-function shop:buyItem(selection)
-    shopItems[selection].cPrice = shopItems[selection].dPrice * 2
+function shop:buyItem()
+    infoText = ''
+    if inventory.wallet < shopItems[menuCursor].cPrice then
+        return nil
+    end
+    if inventory[menuCursor].quantity >= shopItems[menuCursor].max and shopItems[menuCursor].max ~= 0 then
+        infoText = 'MAXIMUM REACHED!'
+        return nil
+    end
+    inventory.wallet = inventory.wallet - shopItems[menuCursor].cPrice
+    inventory[menuCursor].quantity = inventory[menuCursor].quantity + 1
+    local newPrice = shopItems[menuCursor].dPrice + shopItems[menuCursor].scale * inventory[menuCursor].quantity
+    shopItems[menuCursor].cPrice = newPrice
+    infoText = shopItems[menuCursor].title .. ' BOUGHT!'
 end
 
 function shop:animationPercent(time)
+    infoText = ''
     if time <= 1 and time >= 0 then
         return 20 * (time ^ 5/ 20 - time ^ 4 / 8 + time ^ 2 / 8)
     elseif time > 1 then
