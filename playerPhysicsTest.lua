@@ -4,7 +4,7 @@ Class = require("lib.hump.class")
 require("classPlatform")
 require("classPlayer")
 require("classPickup")
-
+require("Victory")
 
 
 playerPhysicsTest = {}
@@ -12,6 +12,9 @@ playerPhysicsTest = {}
 
 
 function playerPhysicsTest:enter()
+    if inventory.levelCurrent == 4 then
+      return Gamestate.push(victory)
+    end
     local level = love.filesystem.load("level"..inventory.levelCurrent..".lua")
     level()
     fizz.setGravity(0, gravity)
