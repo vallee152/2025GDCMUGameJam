@@ -14,7 +14,9 @@ movingPlatforms = {
   flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 550,1000,0)
 }
 
-coins = {}
+coins = {
+  coin = Pickup(700, 390, 10, 5)
+  }
 
 player = Player(startx, starty, 16, 32)
 switch = Switch(100,340, startingPower) --coconut
