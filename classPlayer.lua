@@ -42,6 +42,6 @@ Player = Class {
     end;
   
   drawSpaghetti = function(self, stretch)
-          	love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5*self.animationFlip, self.hitbox.y - self.hitbox.hh*2*stretch, 0, 2*self.animationFlip, 2)
+          	love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5*self.animationFlip, self.hitbox.y - self.hitbox.hh*2*stretch*0.5, 0, 2*self.animationFlip, 2*stretch*0.5)
           end;
 }
