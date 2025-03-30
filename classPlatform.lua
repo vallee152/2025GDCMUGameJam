@@ -53,18 +53,60 @@ MovingPlatform = Class{
       end;
     
     update = function(self)
-      if self.reversed == false then
-        if (self.phys.x * self.xDir > self.xFinal * self.xDir) or (self.phys.y * self.yDir > self.yFinal * self.yDir) then
-          fizz.setVelocity(self.phys, -1*self.xVelOg, -1*self.yVelOg)
-          self.reversed = true
+      if self.xDir > 0 then
+        if self.reversed == false then
+          if self.phys.x > self.xFinal then
+            fizz.setVelocity(self.phys, -1*self.xVelOg, -1*self.yVelOg)
+            self.reversed = true
+          end
+        else
+          if self.phys.x < self.xOg then
+            fizz.setVelocity(self.phys, self.xVelOg, self.yVelOg)
+            self.reversed = false
+          end
         end
-      else
-        if (self.phys.x * self.xDir < self.xOg * self.xDir) or (self.phys.y * self.yDir < self.yOg * self.yDir) then
-          fizz.setVelocity(self.phys, self.xVelOg, self.yVelOg)
-          self.reversed = false
+      elseif self.xDir < 0 then
+        if self.reversed == false then
+          if self.phys.x < self.xFinal then
+            fizz.setVelocity(self.phys, -1*self.xVelOg, -1*self.yVelOg)
+            self.reversed = true
+          end
+        else
+          if self.phys.x > self.xOg then
+            fizz.setVelocity(self.phys, self.xVelOg, self.yVelOg)
+            self.reversed = false
+          end
+        end
+      end
+      
+      if self.yDir > 0 then
+        if self.reversed == false then
+          if self.phys.y > self.yFinal then
+            fizz.setVelocity(self.phys, -1*self.xVelOg, -1*self.yVelOg)
+            self.reversed = true
+          end
+        else
+          if self.phys.y < self.yOg then
+            fizz.setVelocity(self.phys, self.xVelOg, self.yVelOg)
+            self.reversed = false
+          end
+        end
+      elseif self.yDir < 0 then
+        if self.reversed == false then
+          if self.phys.y < self.yFinal then
+            fizz.setVelocity(self.phys, -1*self.xVelOg, -1*self.yVelOg)
+            self.reversed = true
+          end
+        else
+          if self.phys.y > self.yOg then
+            fizz.setVelocity(self.phys, self.xVelOg, self.yVelOg)
+            self.reversed = false
+          end
         end
       end
     end;
+      
+        
     
 }
 
