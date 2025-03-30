@@ -19,6 +19,7 @@ platforms = {
     l2wall5 = Platform(-50+offset, 500+offset, 12, 1000, 2),
     l2wall6 = Platform(1300+offset, 0+offset, 12, 600, 2),
     l2wall7 = Platform(1600+offset, 700+offset, 12, 800, 2),
+    l2floor4 = Platform(1700+offset, 960+offset, 100, 10, 0),
 }
 
 movingPlatforms = {
@@ -44,4 +45,4 @@ portals = {
 
 player = Player(startx+offset, starty+offset, 16, 32)
 
-death = 5000+offset
+death = 1600+offset
