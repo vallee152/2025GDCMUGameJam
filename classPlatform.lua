@@ -59,9 +59,9 @@ MovingPlatform = Class{
 }
 
 Switch = Class{
-    init = function(self, x, y)
+    init = function(self, x, y, state)
       self.hitbox = Shapes.create.rect(x, y, 32, 32)
-      self.on = true
+      self.on = state
     end;
     
     draw = function(self)

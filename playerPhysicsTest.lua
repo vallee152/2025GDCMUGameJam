@@ -4,20 +4,16 @@ Class = require("lib.hump.class")
 require("classPlatform")
 require("classPlayer")
 require("classPickup")
+require("testLevel")
 
-fizz.setGravity(0, 600)
+fizz.setGravity(0, gravity)
 
 betterMaxVelocity = 200
 
-require("testLevel")
 
 playerPhysicsTest = {}
 
 player = Player(100, 100, 16, 32)
-
-coin = Pickup(50, 370, 10, 5)
-
-switch = Switch(100, 370)
 
 
 function playerPhysicsTest:enter()
@@ -31,6 +27,9 @@ function playerPhysicsTest:update(dt)
     fizz.update(dt)
     for i,v in pairs(movingPlatforms) do
       v:update()
+    end
+    for i,v in pairs(coins) do
+      v:isColliding(player, dt)
     end
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
@@ -64,7 +63,6 @@ function playerPhysicsTest:update(dt)
         player.jumpCount = player.jumpMax
     end
 
-    coin:isColliding(player, dt)
 
 
 end
@@ -72,7 +70,8 @@ end
 function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
-    love.graphics.print(tostring(inventory.wallet), -300+camera.x, -300+camera.y)
+    love.graphics.print("Scrap: " ..tostring(inventory.wallet), -300+camera.x, -300+camera.y)
+    switch:draw()
     player:draw()
     for i,v in pairs(platforms) do
       v:draw()
@@ -80,8 +79,8 @@ function playerPhysicsTest:draw()
     for i,v in pairs(movingPlatforms) do
       v:draw()
     end
-    
-    coin:draw()
-    switch:draw()
+    for i,v in pairs(coins) do
+      v:draw()
+    end
     camera:detach() --MUST be at the end of draw()
 end
