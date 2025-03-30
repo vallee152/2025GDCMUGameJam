@@ -40,4 +40,8 @@ Player = Class {
 		-- bounds box: love.graphics.rectangle("fill", self.hitbox.x - self.hitbox.hw, self.hitbox.y - self.hitbox.hh, self.hitbox.hw*2, self.hitbox.hh*2)
       	love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5*self.animationFlip, self.hitbox.y - self.hitbox.hh*2, 0, 2*self.animationFlip, 2)
     end;
+  
+  drawSpaghetti = function(self, stretch)
+          	love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5*self.animationFlip, self.hitbox.y - self.hitbox.hh*2*stretch, 0, 2*self.animationFlip, 2)
+          end;
 }
