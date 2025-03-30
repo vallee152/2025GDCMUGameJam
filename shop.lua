@@ -126,9 +126,9 @@ function shop:draw()
     love.graphics.print({{1,1,1}, 'Price: ' .. tostring(shopItems[menuCursor].cPrice)
         .. shop:tabText(tostring(shopItems[menuCursor].cPrice), 6) .. 'Quantity: ' .. tostring(inventory[menuCursor].quantity)}, 228, 390)
     if inventory.wallet < shopItems[menuCursor].cPrice and infoText == '' then
-        infoText = 'NOT ENOUGH GEARS: ' .. tostring(inventory.wallet)
+        infoText = 'NOT ENOUGH SCRAP: ' .. tostring(inventory.wallet)
     end
-    local moneyString = 'YOUR GEARS: ' .. tostring(inventory.wallet)
+    local moneyString = 'YOUR SCRAP: ' .. tostring(inventory.wallet)
     if infoText == '' then
         infoText = moneyString
     end
