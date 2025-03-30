@@ -2,6 +2,7 @@ fizz = require("lib.fizzx")
 Class = require("lib.hump.class")
 require("classPlatform")
 fizz.setGravity(0, 600)
+require("testLevel")
 
 playerPhysicsTest = {}
 
@@ -32,8 +33,9 @@ function playerPhysicsTest:update(dt)
     camera:move(dx/2, dy/2)
     
     fizz.update(dt)
-    flyingBox:update()
-
+    for i,v in pairs(movingPlatforms) do
+      v:update()
+    end
     if love.keyboard.isDown('right') then
         player.x = player.x + (player.speed * dt)
     elseif love.keyboard.isDown('left') then
@@ -63,9 +65,12 @@ function playerPhysicsTest:draw()
 
     
     player.draw()
-    wall1:draw()
-    wall2:draw()
-    flyingBox:draw()
+    for i,v in pairs(platforms) do
+      v:draw()
+    end
+    for i,v in pairs(movingPlatforms) do
+      v:draw()
+    end
     
     camera:detach() --MUST be at the end of draw()
 end
