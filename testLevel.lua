@@ -14,7 +14,7 @@ platforms = {
 
 movingPlatforms = {
 
-  flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 250)
+  flyingBox = MovingPlatform(350, 400, 50, 10, 0, 50, 1000, 600)
 }
 
 
