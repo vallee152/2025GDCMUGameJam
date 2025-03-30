@@ -16,7 +16,7 @@ function love.load()
     love.graphics.setDefaultFilter('nearest', 'nearest', 0)
     Font = love.graphics.newFont('Colours/joystix monospace.otf', 16)
     love.graphics.setFont(Font)
-    Gamestate.switch(shop)
+    Gamestate.switch(playerPhysicsTest)
 end
 
 function love.update(dt)

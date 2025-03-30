@@ -26,7 +26,6 @@ MovingPlatform = Class{
     
     draw = function(self)
       love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
-      love.graphics.print(fizz.getVelocity(self.phys),100,100)
     end;
     
     

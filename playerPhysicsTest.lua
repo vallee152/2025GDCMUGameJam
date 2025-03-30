@@ -65,14 +65,7 @@ function playerPhysicsTest:update(dt)
         player.jumpCount = player.jumpMax
     end
 
-    if coin ~= nil then 
-        _, _, pen = Shapes.test(coin.hitbox, player.hitbox, dt)
-
-        if pen ~= nil then
-            player.wallet = player.wallet + coin:payPlayer()
-            coin = nil
-        end
-    end
+    coin:isColliding(player, dt)
 
 
 end
@@ -80,7 +73,7 @@ end
 function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
-    
+    love.graphics.print(tostring(player.wallet), -300+player.hitbox.x, -300+player.hitbox.y)
     player:draw()
     for i,v in pairs(platforms) do
       v:draw()

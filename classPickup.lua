@@ -6,12 +6,25 @@ Pickup = Class {
     init = function(self, x, y, radius, amount)
         self.hitbox = Shapes.create.circle(x, y, radius)
         self.amount = amount
+        self.collected = false
     end;
-    payPlayer = function(self, amount)
+    payPlayer = function(self)
         return self.amount
     end;
     draw = function(self)
-        love.graphics.circle('fill', self.hitbox.x, self.hitbox.y, self.hitbox.r)
+        if self.collected ~= true then
+            love.graphics.circle('fill', self.hitbox.x, self.hitbox.y, self.hitbox.r)
+        end
+    end;
+    isColliding = function(self, player, time)
+        if self.collected ~= true then
+            _, _, pen = Shapes.test(player.hitbox, self.hitbox, time)
+            if pen ~= nil then
+                player.wallet = player.wallet + self:payPlayer()
+                self.collected = true
+
+            end
+        end
     end
 }
 
