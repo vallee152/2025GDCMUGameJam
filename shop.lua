@@ -139,13 +139,13 @@ function shop:draw()
 end
 
 function shop:keypressed(key)
-    if key == 'up' or key == 'left' or key == 'w' or key == 'a' then
+    if key == 'left' or key == 'a' then
         menuCursor = (menuCursor - 1) % shopItems.length
-    elseif key == 'down' or key == 'right' or key == 's' or key == 'd' then
+    elseif key == 'right' or key == 'd' then
         menuCursor = (menuCursor + 1) % shopItems.length
-    elseif key == 'q' then
+    elseif key == 'up' or key == 'w' then
         shop:buyItem()
-    elseif key == 'lshift' or key == 'rshift' then
+    elseif key == 'down' or key == 's' then
         inventory.levelCurrent = inventory.levelCurrent + 1
         inventory.levelCheckpoint = inventory.levelCurrent
         return Gamestate.push(playerPhysicsTest)
