@@ -9,6 +9,7 @@ require "playerPhysicsTest"
 require "game"
 require "shop"
 require "levelComplete"
+require "inventory"
 menuCursor = 0
 levelCurrent = 0
 levelCheckpoint = 0
