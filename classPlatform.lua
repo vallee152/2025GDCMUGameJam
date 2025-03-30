@@ -1,6 +1,7 @@
 fizz = require("lib.fizzx")
 Class = require("lib.hump.class")
 Signal = require("lib.hump.signal")
+require("levelComplete")
 
 Platform = Class {
     
@@ -84,6 +85,7 @@ Switch = Class{
 
 Portal = Class{
   init = function(self, x, y, isExit)
+    self.exited = false
     self.hitbox = Shapes.create.rect(x,y,32,64)
     self.isExit = isExit
     self.animationSet = {}
@@ -106,6 +108,12 @@ Portal = Class{
   update = function(self, dt)
     self.animationCount = self.animationCount + (self.animationSpeed * dt)
     self.img = self.animationSet[math.fmod(math.floor(self.animationCount), 4)]
+    if isExit then
+      _, _, pen = Shapes.test(player.hitbox, self.hitbox, time)
+      if pen ~= nil then
+        self.exited = true
+      end
+    end
   end;
   
   draw = function(self)

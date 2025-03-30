@@ -38,6 +38,9 @@ function playerPhysicsTest:update(dt)
     end
     for i,v in pairs(portals) do
       v:update(dt)
+      if v.exited then
+        return Gamestate.push(levelComplete)
+      end
     end
     
     if love.keyboard.isDown('right') then

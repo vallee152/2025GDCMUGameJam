@@ -25,6 +25,6 @@ coins = {
 switch = Switch(100,400, startingPower)
 
 portals = {
-  exit = Portal(800, 330, true)
+  exit = Portal(800, 500, true)
 }
 switch = Switch(100,400, startingPower)
