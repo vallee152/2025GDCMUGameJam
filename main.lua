@@ -7,7 +7,7 @@ Signal = require "lib.hump.signal"
 Camera = require "lib.hump.camera"
 require "playerPhysicsTest"
 require "game"
-require "shop"
+--require "shop"
 menuCursor = 0
 
 function love.load()

@@ -5,26 +5,17 @@ require("classPlatform")
 require("classPlayer")
 require("classPickup")
 
-
 fizz.setGravity(0, 600)
+
+betterMaxVelocity = 200
+
 require("testLevel")
 
 playerPhysicsTest = {}
 
-
-player = fizz.addDynamic('rect', 0, 100, 16, 32)
-
 player = Player(100, 100, 16, 32)
 
 coin = Pickup(50, 370, 10, 5)
-
-player = Player(100, 100, 16, 32)
-
-coin = Pickup(50, 370, 10, 5)
-
-wall1 = Platform(100, 400, 200, 10)
-wall2 = Platform(600, 400, 200, 10)
-flyingBox = MovingPlatform(300, 350, 50, 10, 50, 0, 400)
 
 
 function playerPhysicsTest:enter()
@@ -40,12 +31,12 @@ function playerPhysicsTest:update(dt)
       v:update()
     end
     if love.keyboard.isDown('right') then
-        player.hitbox.x = player.hitbox.x + (player.speed * dt)
+        player.hitbox.xv = player.hitbox.xv + player.speed
         player.animationFlip = 1
         player.animationCount = player.animationCount + (player.animationSpeed * dt)
         player.img = player.animationSet[math.fmod(math.floor(player.animationCount),2)]
     elseif love.keyboard.isDown('left') then
-        player.hitbox.x = player.hitbox.x - (player.speed * dt)
+        player.hitbox.xv = player.hitbox.xv - player.speed
         player.animationFlip = -1
         player.animationCount = player.animationCount + (player.animationSpeed * dt)
         player.img = player.animationSet[math.fmod(math.floor(player.animationCount),2)]
@@ -55,12 +46,18 @@ function playerPhysicsTest:update(dt)
     function love.keypressed(key)
         if key == 'up' then
             if player.jumpCount ~= 0 then
-                fizz.setVelocity(player.hitbox, 0, player.jumpVelocity)
+                fizz.setVelocity(player.hitbox, player.hitbox.xv, player.jumpVelocity)
                 player.jumpCount = player.jumpCount-1
             end
         elseif key == "t" then
           flyingBox:toggle()
         end
+    end
+
+    if player.hitbox.xv > betterMaxVelocity then
+        player.hitbox.xv = betterMaxVelocity
+    elseif player.hitbox.xv < -betterMaxVelocity then
+        player.hitbox.xv = -betterMaxVelocity
     end
 
     x, y = fizz.getVelocity(player.hitbox)
@@ -84,22 +81,17 @@ function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
     
-    player.draw()
+    player:draw()
     for i,v in pairs(platforms) do
       v:draw()
     end
     for i,v in pairs(movingPlatforms) do
       v:draw()
     end
-
-    love.graphics.print(tostring(Shapes.bounds(player.hitbox)), 100, 200)
+    
     if coin ~= nil then
         coin:draw()
     end
-    player:draw()
-    wall1:draw()
-    wall2:draw()
-    flyingBox:draw()
     
     camera:detach() --MUST be at the end of draw()
 end
