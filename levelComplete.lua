@@ -11,3 +11,7 @@ function levelComplete:draw()
   love.graphics.print("Bonus increases by 10% \nfor every level you complete in a row.",100,200)
   love.graphics.print("Press S or Down to continue exploring. \nPress W or Up to return to your ship \nand buy upgrades.",100,250)
 end
+
+function levelComplete:resume()
+  levelCurrent = levelCurrent + 1
+end

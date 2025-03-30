@@ -1,5 +1,6 @@
 fizz = require("lib.fizzx")
 Class = require("lib.hump.class")
+Signal = require("lib.hump.signal")
 
 Platform = Class {
     
@@ -22,6 +23,9 @@ MovingPlatform = Class{
       
       self.phys = fizz.addKinematic('rect', x, y, halfWidth, halfHeight)
       fizz.setVelocity(self.phys, xVel, yVel)
+      Signal.register("power", function()
+          self:toggle()
+      end)
     end;
     
     draw = function(self)
@@ -51,4 +55,29 @@ MovingPlatform = Class{
           end
       end
     end;
+    
+}
+
+Switch = Class{
+    init = function(self, x, y)
+      self.hitbox = Shapes.create.rect(x, y, 32, 32)
+      self.on = true
+    end;
+    
+    draw = function(self)
+      if self.on then
+        love.graphics.rectangle("fill", self.hitbox.x - 16, self.hitbox.y - 16, 64, 64)
+      else
+        love.graphics.rectangle("line", self.hitbox.x - 16, self.hitbox.y - 16, 64, 64)
+      end
+    end;
+    
+    toggle = function(self)
+      _, _, pen = Shapes.test(player.hitbox, self.hitbox, time)
+      if pen ~= nil then
+        self.on = not self.on
+          Signal.emit("power")
+      end
+    end;
+      
 }

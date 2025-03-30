@@ -17,6 +17,8 @@ player = Player(100, 100, 16, 32)
 
 coin = Pickup(50, 370, 10, 5)
 
+switch = Switch(100, 370)
+
 
 function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
@@ -46,8 +48,8 @@ function playerPhysicsTest:update(dt)
                 fizz.setVelocity(player.hitbox, player.hitbox.xv, player.jumpVelocity)
                 player.jumpCount = player.jumpCount-1
             end
-        elseif key == "t" then
-          flyingBox:toggle()
+        elseif key == "down" then
+          switch:toggle()
         end
     end
 
@@ -80,6 +82,6 @@ function playerPhysicsTest:draw()
     end
     
     coin:draw()
-    
+    switch:draw()
     camera:detach() --MUST be at the end of draw()
 end
