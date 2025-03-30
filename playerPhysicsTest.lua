@@ -8,7 +8,7 @@ require("testLevel")
 
 fizz.setGravity(0, gravity)
 
-betterMaxVelocity = 200
+require("testLevel")
 
 
 playerPhysicsTest = {}
@@ -36,6 +36,7 @@ function playerPhysicsTest:update(dt)
     for i,v in pairs(coins) do
       v:isColliding(player, dt)
     end
+
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
         player.animationCount = player.animationCount + (player.animationSpeed * time)
@@ -84,7 +85,6 @@ function playerPhysicsTest:update(dt)
         previousYV = player.hitbox.yv
     end
 
-    coin:isColliding(player, time)
 
 
 end
