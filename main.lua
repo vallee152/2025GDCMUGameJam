@@ -15,7 +15,8 @@ menuCursor = 0
 levelCurrent = 1
 levelCheckpoint = 1
 
-function love.load()
+function love.load()  
+    love.window.setTitle("Shellworld")
     source = love.audio.newSource('Colours/song.ogg', 'static')
     source:setLooping(true)
     source:play()
