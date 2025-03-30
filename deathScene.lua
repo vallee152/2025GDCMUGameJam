@@ -14,6 +14,9 @@ function deathScene:draw()
   camera:move(dx/2, dy/2)
   camera:attach()
   stretch = stretch + 0.1
+  if player.hitbox.yv > 50 then
+    player.hitbox.yv = 50
+  end
   player:drawSpaghetti(stretch)
   if stretch > 20 then
     return Gamestate.push(playerPhysicsTest)
