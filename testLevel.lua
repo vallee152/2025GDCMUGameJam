@@ -7,16 +7,16 @@ local startx = 18
 local starty = 324
 
 platforms = {
-  floor1 = Platform(100, 400, 200, 10),
-  floor2 = Platform(800, 450, 200, 10),
-  wall = Platform(200, 360, 32, 32)
+  floor1 = Platform(100, 400, 200, 10, 0),
+  floor2 = Platform(800, 450, 200, 10, 0),
+  wall = Platform(200, 360, 32, 32, 2)
 }
 
 movingPlatforms = {
 
-  flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 450, 9000),
+  flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 450, 9000, 0),
   
-  anotherPlatform = MovingPlatform(450, 100, 50, 10, 0, 60, 850, 400)
+  anotherPlatform = MovingPlatform(450, 100, 50, 10, 0, 60, 850, 400, 0)
 }
 
 
