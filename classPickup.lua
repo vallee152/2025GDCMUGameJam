@@ -20,7 +20,7 @@ Pickup = Class {
         if self.collected ~= true then
             _, _, pen = Shapes.test(player.hitbox, self.hitbox, time)
             if pen ~= nil then
-                player.wallet = player.wallet + self:payPlayer()
+                inventory.wallet = inventory.wallet + self:payPlayer()
                 self.collected = true
 
             end

@@ -32,14 +32,11 @@ function playerPhysicsTest:update(dt)
     end
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
-        player.animationFlip = 1
         player.animationCount = player.animationCount + (player.animationSpeed * dt)
-        player.img = player.animationSet[math.fmod(math.floor(player.animationCount),2)]
-    elseif love.keyboard.isDown('left') then
+    end
+    if love.keyboard.isDown('left') then
         player.hitbox.xv = player.hitbox.xv - player.speed
-        player.animationFlip = -1
         player.animationCount = player.animationCount + (player.animationSpeed * dt)
-        player.img = player.animationSet[math.fmod(math.floor(player.animationCount),2)]
     end
 
 
@@ -73,7 +70,7 @@ end
 function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
-    love.graphics.print(tostring(player.wallet), -300+player.hitbox.x, -300+player.hitbox.y)
+    love.graphics.print(tostring(inventory.wallet), -300+camera.x, -300+camera.y)
     player:draw()
     for i,v in pairs(platforms) do
       v:draw()
@@ -82,9 +79,7 @@ function playerPhysicsTest:draw()
       v:draw()
     end
     
-    if coin ~= nil then
-        coin:draw()
-    end
+    coin:draw()
     
     camera:detach() --MUST be at the end of draw()
 end
