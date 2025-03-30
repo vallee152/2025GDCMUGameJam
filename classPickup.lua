@@ -7,13 +7,18 @@ Pickup = Class {
         self.hitbox = Shapes.create.circle(x, y, radius)
         self.amount = amount
         self.collected = false
+        self.animationSpeed = 1
+        self.animationCount = 0
+        self.animationSet = {[0] = love.graphics.newImage("Colours/scrap1.png"), [1] = love.graphics.newImage("Colours/scrap2.png")}
     end;
     payPlayer = function(self)
         return self.amount
     end;
     draw = function(self)
         if self.collected ~= true then
+            self.animationCount = self.animationCount + (self.animationSpeed * 0.02)
             love.graphics.circle('fill', self.hitbox.x, self.hitbox.y, self.hitbox.r)
+            love.graphics.draw(self.animationSet[math.fmod(math.floor(self.animationCount), 2)], self.hitbox.x - self.hitbox.r*3, self.hitbox.y  - self.hitbox.r*3, 0, 2, 2)
         end
     end;
     isColliding = function(self, player, time)
@@ -27,19 +32,3 @@ Pickup = Class {
         end
     end
 }
-
-    --[[checks collision and adds money
-    if gearPickup ~= nil then 
-        _, _, pen = Shapes.test(gearPickup.hitbox, player.hitbox, dt)
-
-        if pen ~= nil then
-            player.wallet = player.wallet + gearPickup:payPlayer()
-            gearPickup = nil
-        end
-    end]]
-
-    --[[draw requires this extra bit
-    if gearPickup ~= nil then
-        gearPickup:draw()
-    end
-    ]]

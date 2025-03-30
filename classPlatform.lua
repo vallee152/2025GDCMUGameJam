@@ -128,13 +128,18 @@ Switch = Class{
     init = function(self, x, y, state)
       self.hitbox = Shapes.create.rect(x, y, 32, 32)
       self.on = state
+      self.animationSet = {[-1] = love.graphics.newImage("Colours/switchOff.png"), [0] = love.graphics.newImage("Colours/switchOn1.png"), [1] = love.graphics.newImage("Colours/switchOn2.png"),}
+      self.animationCount = 0
+      self.animationSpeed = 2
     end;
     
     draw = function(self)
       if self.on then
-        love.graphics.rectangle("fill", self.hitbox.x - 16, self.hitbox.y - 16, 64, 64)
+        self.animationCount = self.animationCount + (self.animationSpeed*0.02)
+        love.graphics.draw(self.animationSet[math.fmod(math.floor(self.animationCount), 2)], self.hitbox.x-self.hitbox.hw-2, self.hitbox.y-self.hitbox.hh-2, 0, 64/20, 64/20)
+
       else
-        love.graphics.rectangle("line", self.hitbox.x - 16, self.hitbox.y - 16, 64, 64)
+        love.graphics.draw(self.animationSet[-1], self.hitbox.x-self.hitbox.hw-2, self.hitbox.y-self.hitbox.hh-2, 0, 64/20, 64/20)
       end
     end;
     
