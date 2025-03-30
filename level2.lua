@@ -44,4 +44,4 @@ portals = {
 
 player = Player(startx+offset, starty+offset, 16, 32)
 
-death = 10000+offset
+death = 5000+offset
