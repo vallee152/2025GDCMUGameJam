@@ -11,6 +11,7 @@ platforms = {
 }
 
 movingPlatforms = {
+<<<<<<< Updated upstream
   flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 250)
 }
 
@@ -22,3 +23,8 @@ coins = {
 }
 
 switch = Switch(100,400, startingPower)
+=======
+  flyingBox = MovingPlatform(350, 400, 50, 10, 80, 0, 250),
+  flyingBox = MovingPlatform(450, 500, 50, 10, 80, 50, 250)
+}
+>>>>>>> Stashed changes

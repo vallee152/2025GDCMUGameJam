@@ -7,8 +7,9 @@ Player = Class {
 		self.hitbox = fizz.addDynamic("rect", x, y, halfWidth, halfHeight)
 		self.hitbox.friction = 0.10
 		self.speed = 7
-	    self.jumpVelocity = -300
-	    self.jumpMax = 1
+		self.maxVelocity = 200
+	    self.jumpVelocity = -300 * (math.pow(1.2, inventory[0].quantity))
+	    self.jumpMax = 1 + inventory[3].quantity
 	    self.jumpCount = 1
 	    self.animationSet = {}
 	    self.animationSet[-1] = love.graphics.newImage('Colours/player.png')
@@ -20,6 +21,7 @@ Player = Class {
 	    self.animationCount = 0
 	    self.animationSpeed = 5
 	    self.img = self.animationSet[-1]
+	    self.timeControlStrength = inventory[1].quantity + 1
 	end;
 	animation = function(self)
 		if math.floor(self.hitbox.xv+0.5) > 0 then

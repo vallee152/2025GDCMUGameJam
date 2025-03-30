@@ -21,10 +21,15 @@ function playerPhysicsTest:enter()
 end
 
 function playerPhysicsTest:update(dt)
+    time = dt
+    if timeControl then
+        time = time/player.timeControlStrength
+    end
+
     local dx,dy = player.hitbox.x - camera.x, player.hitbox.y - camera.y --camera update stuff
     camera:move(dx/2, dy/2)
     
-    fizz.update(dt)
+    fizz.update(time)
     for i,v in pairs(movingPlatforms) do
       v:update()
     end
@@ -33,29 +38,40 @@ function playerPhysicsTest:update(dt)
     end
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
-        player.animationCount = player.animationCount + (player.animationSpeed * dt)
+        player.animationCount = player.animationCount + (player.animationSpeed * time)
     end
     if love.keyboard.isDown('left') then
         player.hitbox.xv = player.hitbox.xv - player.speed
-        player.animationCount = player.animationCount + (player.animationSpeed * dt)
+        player.animationCount = player.animationCount + (player.animationSpeed * time)
     end
 
 
     function love.keypressed(key)
-        if key == 'up' then
+        if key == "up" then
             if player.jumpCount ~= 0 then
                 player.hitbox.yv = player.hitbox.yv + player.jumpVelocity
                 player.jumpCount = player.jumpCount-1
             end
         elseif key == "down" then
           switch:toggle()
+        elseif key == "lshift" or key == "rshift" then
+            player.maxVelocity = 400
+            player.speed = 14
+        elseif key == "q" then
+            timeControl = not timeControl
+        end
+    end
+    function love.keyreleased(key)
+        if key == "lshift" or key == "rshift" then
+            player.maxVelocity = 200
+            player.speed = 7
         end
     end
 
-    if player.hitbox.xv > betterMaxVelocity then
-        player.hitbox.xv = betterMaxVelocity
-    elseif player.hitbox.xv < -betterMaxVelocity then
-        player.hitbox.xv = -betterMaxVelocity
+    if player.hitbox.xv > player.maxVelocity then
+        player.hitbox.xv = player.maxVelocity
+    elseif player.hitbox.xv < -player.maxVelocity then
+        player.hitbox.xv = -player.maxVelocity
     end
 
     if player.hitbox.yv == previousYV then
@@ -68,6 +84,7 @@ function playerPhysicsTest:update(dt)
         previousYV = player.hitbox.yv
     end
 
+    coin:isColliding(player, time)
 
 
 end
