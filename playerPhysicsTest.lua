@@ -15,6 +15,9 @@ function playerPhysicsTest:enter()
     local level = love.filesystem.load("level"..inventory.levelCurrent..".lua")
     level()
     fizz.setGravity(0, gravity)
+    if startingPower == false then
+      switch:forceOff()
+    end
     camera = Camera(player.x, player.y)
 end
 
@@ -114,6 +117,5 @@ function playerPhysicsTest:draw()
     for i,v in pairs(coins) do
       v:draw()
     end
-    switch:draw()
     camera:detach() --MUST be at the end of draw()
 end
