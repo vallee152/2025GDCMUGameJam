@@ -10,8 +10,8 @@ platforms = {
 }
 
 movingPlatforms = {
-    flyingBox1 = MovingPlatform(540, 600, 50, 10, 160, 80, 250),
-    flyingBox2 = MovingPlatform(540, 100, 50, 10, 160, 0, 250),
+    flyingBox1 = MovingPlatform(540, 600, 50, 10, 160, 80, 250,50),
+    flyingBox2 = MovingPlatform(540, 100, 50, 10, 160, 0, 250,50),
 }
 
 

@@ -11,8 +11,8 @@ require "shop"
 require "levelComplete"
 require "inventory"
 menuCursor = 0
-levelCurrent = 0
-levelCheckpoint = 0
+levelCurrent = 1
+levelCheckpoint = 1
 
 function love.load()
     love.window.setMode(800, 608, {fullscreen = false, vsync = 1,

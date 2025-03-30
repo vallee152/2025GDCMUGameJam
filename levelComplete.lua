@@ -12,6 +12,18 @@ function levelComplete:draw()
   love.graphics.print("Press S or Down to continue exploring. \nPress W or Up to return to your ship \nand buy upgrades.",100,250)
 end
 
+function levelComplete:keypressed(key)
+  if key == "up" then
+    return Gamestate.push(shop)
+  end
+  if key == "down" then
+    inventory.levelCurrent = inventory.levelCurrent + 1
+    Gamestate.pop()
+    return Gamestate.push(playerPhysicsTest)
+  end
+end
+
 function levelComplete:resume()
-  levelCurrent = levelCurrent + 1
+  inventory.levelCurrent = inventory.levelCurrent + 1
+  return Gamestate.pop()
 end

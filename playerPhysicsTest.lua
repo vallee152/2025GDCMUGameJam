@@ -4,11 +4,7 @@ Class = require("lib.hump.class")
 require("classPlatform")
 require("classPlayer")
 require("classPickup")
-require("testLevel")
 
-fizz.setGravity(0, gravity)
-
-require("testLevel")
 
 
 playerPhysicsTest = {}
@@ -16,9 +12,27 @@ playerPhysicsTest = {}
 
 
 function playerPhysicsTest:enter()
+    local level = love.filesystem.load("level"..inventory.levelCurrent..".lua")
+    level()
+    fizz.setGravity(0, gravity)
     camera = Camera(player.x, player.y)
 end
 
+function playerPhysicsTest:keypressed(key)
+       if key == "up" then
+            if player.jumpCount ~= 0 then
+                player.hitbox.yv = player.hitbox.yv + player.jumpVelocity
+                player.jumpCount = player.jumpCount-1
+            end
+        elseif key == "down" then
+          switch:toggle()
+        elseif key == "lshift" or key == "rshift" then
+            player.maxVelocity = 400
+            player.speed = 14
+        elseif key == "q" then
+            timeControl = not timeControl
+        end
+end
 function playerPhysicsTest:update(dt)
     time = dt
     if timeControl then
@@ -52,21 +66,6 @@ function playerPhysicsTest:update(dt)
     end
 
 
-    function love.keypressed(key)
-        if key == "up" then
-            if player.jumpCount ~= 0 then
-                player.hitbox.yv = player.hitbox.yv + player.jumpVelocity
-                player.jumpCount = player.jumpCount-1
-            end
-        elseif key == "down" then
-          switch:toggle()
-        elseif key == "lshift" or key == "rshift" then
-            player.maxVelocity = 400
-            player.speed = 14
-        elseif key == "q" then
-            timeControl = not timeControl
-        end
-    end
     function love.keyreleased(key)
         if key == "lshift" or key == "rshift" then
             player.maxVelocity = 200

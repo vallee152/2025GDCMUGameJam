@@ -1,6 +1,4 @@
-require("classPlatform")
-require("classPlayer")
-require("classPickup")
+
 startingPower = false --true if we start with the power on, false if we start with it off.
 gravity = 600
 local startx = 18
