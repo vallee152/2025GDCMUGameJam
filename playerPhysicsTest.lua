@@ -36,13 +36,10 @@ function playerPhysicsTest:update(dt)
     for i,v in pairs(coins) do
       v:isColliding(player, dt)
     end
-<<<<<<< Updated upstream
-
-=======
     for i,v in pairs(portals) do
       v:update(dt)
     end
->>>>>>> Stashed changes
+    
     if love.keyboard.isDown('right') then
         player.hitbox.xv = player.hitbox.xv + player.speed
         player.animationCount = player.animationCount + (player.animationSpeed * time)
