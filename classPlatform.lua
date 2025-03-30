@@ -81,3 +81,34 @@ Switch = Class{
     end;
       
 }
+
+Portal = Class{
+  init = function(self, x, y, isExit)
+    self.hitbox = Shapes.create.rect(x,y,32,64)
+    self.isExit = isExit
+    self.animationSet = {}
+    if isExit then
+	    self.animationSet[0] = love.graphics.newImage('Colours/exitPortal1.png')
+	    self.animationSet[1] = love.graphics.newImage('Colours/exitPortal2.png')
+	    self.animationSet[2] = love.graphics.newImage('Colours/exitPortal3.png')
+	    self.animationSet[3] = love.graphics.newImage('Colours/exitPortal2.png')
+    else
+      self.animationSet[0] = love.graphics.newImage('Colours/entryPortal1.png')
+	    self.animationSet[1] = love.graphics.newImage('Colours/entryPortal2.png')
+	    self.animationSet[2] = love.graphics.newImage('Colours/entryPortal3.png')
+	    self.animationSet[3] = love.graphics.newImage('Colours/entryPortal2.png')
+    end
+    self.animationCount = 0
+    self.animationSpeed = 2
+    self.img = self.animationSet[0]
+  end;
+  
+  update = function(self, dt)
+    self.animationCount = self.animationCount + (self.animationSpeed * dt)
+    self.img = self.animationSet[math.fmod(math.floor(self.animationCount), 4)]
+  end;
+  
+  draw = function(self)
+    love.graphics.draw(self.img, self.hitbox.x - self.hitbox.hw*5, self.hitbox.y - self.hitbox.hh*2, 0, 2, 2)
+  end;
+  }
