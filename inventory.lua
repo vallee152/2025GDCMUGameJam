@@ -4,6 +4,6 @@ inventory = {
 	[2] = {quantity = 0, uses = 0},
 	[3] = {quantity = 0, uses = 0},
 	wallet = 0,
-  levelCurrent = 3,
-  levelCheckpoint = 3
+  levelCurrent = 1,
+  levelCheckpoint = 1
 }
