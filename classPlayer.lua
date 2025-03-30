@@ -5,7 +5,7 @@ require("inventory")
 Player = Class {
 	init = function(self, x, y, halfWidth, halfHeight)
 		self.hitbox = fizz.addDynamic("rect", x, y, halfWidth, halfHeight)
-		self.hitbox.friction = 0.15
+		self.hitbox.friction = 0.10
 		self.speed = 7
 	    self.jumpVelocity = -300
 	    self.jumpMax = 1

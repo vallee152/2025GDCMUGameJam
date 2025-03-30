@@ -45,7 +45,7 @@ function playerPhysicsTest:update(dt)
     function love.keypressed(key)
         if key == 'up' then
             if player.jumpCount ~= 0 then
-                fizz.setVelocity(player.hitbox, player.hitbox.xv, player.jumpVelocity)
+                player.hitbox.yv = player.hitbox.yv + player.jumpVelocity
                 player.jumpCount = player.jumpCount-1
             end
         elseif key == "down" then
@@ -59,9 +59,14 @@ function playerPhysicsTest:update(dt)
         player.hitbox.xv = -betterMaxVelocity
     end
 
-    x, y = fizz.getVelocity(player.hitbox)
-    if y == 0 then
+    if player.hitbox.yv == previousYV then
         player.jumpCount = player.jumpMax
+        previousYV = 0
+    elseif player.hitbox.yv == 0 then
+        player.jumpCount = player.jumpMax
+        previousYV = 0
+    else
+        previousYV = player.hitbox.yv
     end
 
     coin:isColliding(player, dt)
@@ -80,7 +85,7 @@ function playerPhysicsTest:draw()
     for i,v in pairs(movingPlatforms) do
       v:draw()
     end
-    
+
     coin:draw()
     switch:draw()
     camera:detach() --MUST be at the end of draw()
