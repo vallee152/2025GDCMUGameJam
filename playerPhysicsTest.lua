@@ -11,15 +11,13 @@ require("testLevel")
 
 playerPhysicsTest = {}
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 player = fizz.addDynamic('rect', 0, 100, 16, 32)
-=======
+
 player = Player(100, 100, 16, 32)
->>>>>>> Stashed changes
 
 coin = Pickup(50, 370, 10, 5)
-=======
+
 player = Player(100, 100, 16, 32)
 
 coin = Pickup(50, 370, 10, 5)
@@ -27,7 +25,7 @@ coin = Pickup(50, 370, 10, 5)
 wall1 = Platform(100, 400, 200, 10)
 wall2 = Platform(600, 400, 200, 10)
 flyingBox = MovingPlatform(300, 350, 50, 10, 50, 0, 400)
->>>>>>> Stashed changes
+
 
 function playerPhysicsTest:enter()
     camera = Camera(player.x, player.y)
@@ -85,8 +83,6 @@ end
 function playerPhysicsTest:draw()
     camera:attach() --this MUST be at the beginning of draw() 
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     
     player.draw()
     for i,v in pairs(platforms) do
@@ -95,9 +91,7 @@ function playerPhysicsTest:draw()
     for i,v in pairs(movingPlatforms) do
       v:draw()
     end
-=======
-=======
->>>>>>> Stashed changes
+
     love.graphics.print(tostring(Shapes.bounds(player.hitbox)), 100, 200)
     if coin ~= nil then
         coin:draw()
@@ -106,7 +100,6 @@ function playerPhysicsTest:draw()
     wall1:draw()
     wall2:draw()
     flyingBox:draw()
->>>>>>> Stashed changes
     
     camera:detach() --MUST be at the end of draw()
 end
