@@ -16,6 +16,9 @@ levelCurrent = 1
 levelCheckpoint = 1
 
 function love.load()
+    source = love.audio.newSource('Colours/song.ogg', 'static')
+    source:setLooping(true)
+    source:play()
     love.window.setMode(800, 608, {fullscreen = false, vsync = 1,
         msaa = 0, resizable = false, borderless = false})
     love.graphics.setDefaultFilter('nearest', 'nearest', 0)
