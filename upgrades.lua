@@ -1,31 +1,19 @@
 upgrades = {
   jumpBoost = {
-    title = "Jump Servos",
-    desc = "Increases jump force, letting you jump higher in strong gravity."
-    cost = 1
-    scale = 2
-    max = 0 -- no maximum
+    title = "JUMP SERVOS",
+    desc = "INCREASES JUMP FORCE,\nLETTING YOU JUMP HIGHER IN\nSTRONG GRAVITY."
   };
   timeSlow = {
-    title = "Improved Processor",
-    desc = "Improves your processing speed, essentially slowing down time from your perspective. Press Q to toggle."
-    cost = 2
-    scale = 2
-    max = 0
+    title = "IMPROVED PROCESSOR",
+    desc = "IMPROVES YOUR PROCESSING\nSPEED, ESSENTIALLY SLOWING\nDOWN TIME FROM YOUR\nPERSPECTIVE.\nPRESS Q TO TOGGLE."
   };
   sprint = {
-    title = "Propulsion Capacitors",
-    desc = "Allows you a quick burst of speed: hold Shift to accelerate. More upgrades let you stay at high speed for longer."
-    cost = 1
-    scale = 2
-    max = 0
+    title = "PROPULSION CAPACITORS",
+    desc = "ALLOWS YOU A QUICK BURST\nOF SPEED: HOLD SHIFT TO\nACCELERATE. MORE UPGRADES\nLET YOU STAY AT HIGH SPEED\nFOR LONGER."
   };
   doubleJump = {
-    title = "RCS Thrusters",
-    desc = "Allows you to 'jump' in mid-air. More upgrades let you jump more times before you touch the ground."
-    cost = 3
-    scale = 2
-    max = 5
+    title = "RCS THRUSTERS",
+    desc = "ALLOWS YOU TO 'JUMP' IN\nMID-AIR. MORE UPGRADES LET\nYOU JUMP MORE TIMES BEFORE\nYOU TOUCH THE GROUND."
   };
   
 }
