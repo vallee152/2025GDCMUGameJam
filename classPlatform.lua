@@ -5,16 +5,25 @@ require("levelComplete")
 
 Platform = Class {
     
-    init = function(self, x, y, halfWidth, halfHeight)
+    init = function(self, x, y, halfWidth, halfHeight, texture)
         self.phys = fizz.addStatic('rect', x, y, halfWidth, halfHeight)
+        self.img = {[0] = love.graphics.newImage("Colours/dirtGround.png"), [1] = love.graphics.newImage("Colours/steelGround.png"), [2] = love.graphics.newImage("Colours/steelWall.png")}
+        self.tile = self.img[texture]
+        self.quad = love.graphics.newQuad(0, 0, halfWidth*2, halfHeight*2, self.tile:getWidth(), self.tile:getHeight())
+        if texture == 2 then
+          self.tile:setWrap('mirroredrepeat', 'repeat')
+        else
+          self.tile:setWrap('mirroredrepeat', 'clamp')
+        end
+        
     end;
     draw = function(self)
-        love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
+        love.graphics.draw(self.tile, self.quad, self.phys.x - self.phys.hw, self.phys.y - self.phys.hh)
     end;
 }
 
 MovingPlatform = Class{
-    init = function(self, x, y, halfWidth, halfHeight, xVel, yVel, xFinal, yFinal)
+    init = function(self, x, y, halfWidth, halfHeight, xVel, yVel, xFinal, yFinal, texture)
       self.xOg = x
       self.yOg = y
       self.xVelOg = xVel
@@ -25,7 +34,11 @@ MovingPlatform = Class{
       self.yDir = self.yOg / math.abs(self.yOg)
       self.off = false
       self.reversed = false
-      
+      self.img = {[0] = love.graphics.newImage("Colours/dirtPlatform.png"), [1] = love.graphics.newImage("Colours/dirtPlatform2.png"), [2] = love.graphics.newImage("Colours/steelPlatform.png")}
+      self.tile = self.img[texture]
+      self.quad = love.graphics.newQuad(0, 0, halfWidth*2, halfHeight*2, self.tile:getWidth(), self.tile:getHeight())
+      self.tile:setWrap('clampzero', 'clampzero')
+
       self.phys = fizz.addKinematic('rect', x, y, halfWidth, halfHeight)
       fizz.setVelocity(self.phys, xVel, yVel)
       Signal.register("power", function()
@@ -34,7 +47,8 @@ MovingPlatform = Class{
     end;
     
     draw = function(self)
-      love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
+      --love.graphics.rectangle("fill", self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, self.phys.hw*2, self.phys.hh*2)
+      love.graphics.draw(self.tile, self.quad, self.phys.x - self.phys.hw, self.phys.y - self.phys.hh, 0, (self.phys.hw*2)/self.tile:getWidth(), (self.phys.hh*2)/self.tile:getHeight())
     end;
     
     
