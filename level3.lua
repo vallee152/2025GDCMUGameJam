@@ -3,7 +3,7 @@ gravity = 1400
 offset = 20000
 local startx = 18 +offset
 local starty = 30 +offset
-death = 4000
+death = 4000 + offset
 
 
 
